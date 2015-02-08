@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var dbUrl = 'mongodb://localhost:27017/user-management';
+var mongoose = require('mongoose');
+
 var app = express();
 
 // view engine setup
@@ -54,6 +57,15 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+// connect to MongoDB
+mongoose.connect(dbUrl, function(err) {
+    if(err) {
+        console.log('Connection error to ' + dbUrl, err);
+    } else {
+        console.log('Connection successful to ' + dbUrl);
+    }
 });
 
 
