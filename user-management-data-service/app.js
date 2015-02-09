@@ -4,11 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var config = require('./config/config')
 
-var dbUrl = 'mongodb://localhost:27017/user-management';
 var mongoose = require('mongoose');
 
 var app = express();
@@ -60,6 +61,7 @@ app.use(function(err, req, res, next) {
 });
 
 // connect to MongoDB
+var dbUrl = config.db['url'];
 mongoose.connect(dbUrl, function(err) {
     if(err) {
         console.log('Connection error to ' + dbUrl, err);
