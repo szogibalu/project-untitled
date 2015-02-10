@@ -12,7 +12,7 @@ var testUser = {
 
 describe('Users: models', function() {
 	describe('Create', function() {
-		it('Should create a new User', function(done) {
+		it('Should create a User', function(done) {
 			User.create(testUser, function(err, createdUser) {
 				should.not.exist(err);
 				assert.isNotNull(createdUser._id, 'Id is not given.');
@@ -23,13 +23,25 @@ describe('Users: models', function() {
 		});
 	});
 	describe('Find', function() {
-		it('Should Find an User', function(done) {
+		it('Should Find a User by Id', function(done) {
 			User.create(testUser, function(err, createdUser) {
-				User.findOne(createdUser._id, function(err, res) {
+				User.findById(createdUser._id, function(err, res) {
 					should.not.exist(err);
 					res.firstName.should.equal('John');
 					res.lastName.should.equal('Snow');
 					done();
+				})
+			});
+		});
+	});
+	describe('Delete', function() {
+		it('Should Delete a User by Id', function(done) {
+			User.create(testUser, function(err, createdUser) {
+				User.findByIdAndRemove(createdUser._id, function(err, res) {
+					User.findById(createdUser._id, function(err, res) {
+						assert.isNull(res, 'No user with this id.');
+						done();						
+					})					
 				})
 			});
 		});
