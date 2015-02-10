@@ -1,5 +1,7 @@
 'use strict';
 
+process.env.USER_MANAGEMENT_DB_URL = 'mongodb://localhost:27017/user-management_test'
+
 var config = require('../config/config');
 var mongoose = require('mongoose');
 

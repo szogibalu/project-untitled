@@ -5,10 +5,10 @@ var mongoose = require('mongoose');
 var User = require('../models/user');
 
 router.get('/', function(req, res, next) {
-	User.find(function(err, users) {
+	User.findOne(function(err, user) {
 		if (err)
 			return next(err);
-		res.json(users);
+		res.json(user);
 	});
 });
 
@@ -38,7 +38,8 @@ router.put('/:id', function(req, res, next) {
 
 router.delete('/:id', function(req, res, next) {
   User.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
+    if (err) 
+    	return next(err);
     res.json(post);
   });
 });
