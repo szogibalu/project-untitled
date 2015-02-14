@@ -10,7 +10,11 @@ var testUser = {
 	lastName : 'Snow'
 };
 
-describe('Users: models', function() {
+var update = {		
+		lastName : 'Stark'
+};
+
+describe('User model', function() {
 	describe('Create', function() {
 		it('Should create a User', function(done) {
 			User.create(testUser, function(err, createdUser) {
@@ -23,7 +27,7 @@ describe('Users: models', function() {
 		});
 	});
 	describe('Find', function() {
-		it('Should Find a User by Id', function(done) {
+		it('Should find a User by Id', function(done) {
 			User.create(testUser, function(err, createdUser) {
 				User.findById(createdUser._id, function(err, res) {
 					should.not.exist(err);
@@ -35,11 +39,25 @@ describe('Users: models', function() {
 		});
 	});
 	describe('Delete', function() {
-		it('Should Delete a User by Id', function(done) {
+		it('Should delete a User by Id', function(done) {
 			User.create(testUser, function(err, createdUser) {
 				User.findByIdAndRemove(createdUser._id, function(err, res) {
 					User.findById(createdUser._id, function(err, res) {
 						assert.isNull(res, 'No user with this id.');
+						done();						
+					})					
+				})
+			});
+		});
+	});
+	describe('Update', function() {
+		it('Should update a User by Id', function(done) {
+			User.create(testUser, function(err, createdUser) {
+				User.findByIdAndUpdate(createdUser._id, update, function(err, res) {
+					User.findById(res._id, function(err, updatedUser) {
+						should.not.exist(err);				
+						updatedUser.firstName.should.equal('John');
+						updatedUser.lastName.should.equal('Stark');
 						done();						
 					})					
 				})
