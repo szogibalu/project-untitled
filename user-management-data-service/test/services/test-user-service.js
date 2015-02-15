@@ -6,7 +6,7 @@ var assert = require('chai').assert;
 var service = require('../../services/user-service');
 
 describe('User service', function() {
-	describe('GET', function() {
+	describe('PUT', function() {
 		it('Should create a User', function(done) {
 
 			var request = {
