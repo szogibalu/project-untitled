@@ -10,8 +10,8 @@ var testUser = {
 	lastName : 'Snow'
 };
 
-var update = {		
-		lastName : 'Stark'
+var update = {
+	lastName : 'Stark'
 };
 
 describe('User model', function() {
@@ -44,8 +44,8 @@ describe('User model', function() {
 				User.findByIdAndRemove(createdUser._id, function(err, res) {
 					User.findById(createdUser._id, function(err, res) {
 						assert.isNull(res, 'No user with this id.');
-						done();						
-					})					
+						done();
+					})
 				})
 			});
 		});
@@ -53,15 +53,16 @@ describe('User model', function() {
 	describe('Update', function() {
 		it('Should update a User by Id', function(done) {
 			User.create(testUser, function(err, createdUser) {
-				User.findByIdAndUpdate(createdUser._id, update, function(err, res) {
+				User.findByIdAndUpdate(createdUser._id, update, function(err,
+						res) {
 					User.findById(res._id, function(err, updatedUser) {
-						should.not.exist(err);				
+						should.not.exist(err);
 						updatedUser.firstName.should.equal('John');
 						updatedUser.lastName.should.equal('Stark');
-						done();						
-					})					
+						done();
+					})
 				})
 			});
 		});
-	});
+	});	
 });
