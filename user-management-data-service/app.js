@@ -6,9 +6,18 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var config = require('./config/config')
+// data access objects 
+var user_dao = require('./models/user');
+
+// services
+var user_service = require('./services/user-service')(user_dao);
+
+// routing definitions
+var index_routes = require('./routes/index');
+var user_routes = require('./routes/user')(user_service);
+
+// environment specific configuration
+var configuration = require('./config/config')
 
 var mongoose = require('mongoose');
 
@@ -26,8 +35,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', index_routes);
+app.use('/user', user_routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,7 +70,7 @@ app.use(function(err, req, res, next) {
 });
 
 // connect to MongoDB
-var dbUrl = config.db['url'];
+var dbUrl = configuration.db['url'];
 mongoose.connect(dbUrl, function(err) {
     if(err) {
         console.log('Connection error to ' + dbUrl, err);
