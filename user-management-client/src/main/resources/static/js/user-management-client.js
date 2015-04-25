@@ -13,6 +13,14 @@ angular.module('user-management-client', [ 'ngRoute' ])
 
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
+    $httpProvider.interceptors.push(function(){
+        return {
+              'request': function(config) {
+                    return config;
+               },
+        }
+     });
+
   })
   .controller('home', function($scope, $http) {
       $http.get('token').success(function(token) {
