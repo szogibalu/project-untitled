@@ -79,5 +79,4 @@ mongoose.connect(dbUrl, function(err) {
     }
 });
 
-
 module.exports = app;

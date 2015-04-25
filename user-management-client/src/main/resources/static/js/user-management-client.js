@@ -15,10 +15,18 @@ angular.module('user-management-client', [ 'ngRoute' ])
 
   })
   .controller('home', function($scope, $http) {
-
-
-
-  })
+      $http.get('token').success(function(token) {
+          $http({
+            url : 'http://localhost:9000',
+            method : 'GET',
+            headers : {
+              'X-Auth-Token' : token.token
+            }
+          }).success(function(data) {
+            $scope.data = data.message;
+          });
+       })
+   })
   .controller('navigation', function($rootScope, $scope, $http, $location) {
 
     var authenticate = function(credentials, callback) {
