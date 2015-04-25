@@ -8,6 +8,8 @@ import org.springframework.session.web.http.HeaderHttpSessionStrategy
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+import static java.util.UUID.randomUUID
+
 @SpringBootApplication
 @RestController
 @EnableRedisHttpSession
@@ -15,7 +17,7 @@ class UserManagementResourceServiceApplication {
 
     @RequestMapping('/')
     def home() {
-        [id: UUID.randomUUID().toString(), message: 'Hello World']
+        [id: randomUUID().toString(), message: 'Hello World']
     }
 
     @Bean
