@@ -8,20 +8,17 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>com.szogibalu.untitled</groupId>
+        <artifactId>maven-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <name>user-management-client</name>
     <description>User Management Client</description>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.3.RELEASE</version>
-        <relativePath/>
-    </parent>
-
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>com.szogibalu.untitled.usermanagement.client.UserManagementClientApplication</start-class>
-        <java.version>1.7</java.version>
     </properties>
 
     <dependencies>
@@ -42,7 +39,6 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session</artifactId>
-            <version>1.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,7 +48,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
         </dependency>
 
     </dependencies>
