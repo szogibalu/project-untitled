@@ -1,7 +1,10 @@
-server.port: 9000
+server:
+    address: 127.0.0.1
+    port: 9000
+
 
 security:
-    sessions: NEVER
-
-# TODO move somewhere else
-security.user.password: umrs2015
+  sessions: NEVER
+  # TODO move somewhere else
+  user:
+    password: umrs2015

@@ -1,6 +1,7 @@
 package com.szogibalu.untitled.usermanagement.client.config;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,7 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@EnableZuulProxy
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
