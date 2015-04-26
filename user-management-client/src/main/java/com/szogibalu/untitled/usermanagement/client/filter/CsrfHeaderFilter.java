@@ -1,8 +1,8 @@
 package com.szogibalu.untitled.usermanagement.client.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.util.WebUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -11,20 +11,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.springframework.web.util.WebUtils.getCookie;
+
 public class CsrfHeaderFilter extends OncePerRequestFilter {
+
+    public static final String TOKEN_NAME = "XSRF-TOKEN";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
         if (csrf != null) {
-            Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
+            Cookie cookie = getCookie(request, TOKEN_NAME);
             String token = csrf.getToken();
-            if (cookie == null || token != null && !token.equals(cookie.getValue())) {
-                cookie = new Cookie("XSRF-TOKEN", token);
-                cookie.setPath("/");
-                response.addCookie(cookie);
+            if (cookie == null || !StringUtils.equals(token, cookie.getValue())) {
+                response.addCookie(getCookieWithToken(token));
             }
         }
         filterChain.doFilter(request, response);
+    }
+
+    private Cookie getCookieWithToken(String token) {
+        Cookie cookie = new Cookie(TOKEN_NAME, token);
+        cookie.setPath("/");
+        return cookie;
     }
 }
