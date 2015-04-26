@@ -6,12 +6,12 @@ var assert = require('chai').assert;
 var User = require('../../models/user');
 
 var testUser = {
-	firstName : 'John',
-	lastName : 'Snow'
+	firstName: 'John',
+	lastName: 'Snow'
 };
 
 var update = {
-	lastName : 'Stark'
+	lastName: 'Stark'
 };
 
 describe('User model', function() {
@@ -54,7 +54,7 @@ describe('User model', function() {
 		it('Should update a User by Id', function(done) {
 			User.create(testUser, function(err, createdUser) {
 				User.findByIdAndUpdate(createdUser._id, update, function(err,
-						res) {
+					res) {
 					User.findById(res._id, function(err, updatedUser) {
 						should.not.exist(err);
 						updatedUser.firstName.should.equal('John');
@@ -64,5 +64,5 @@ describe('User model', function() {
 				})
 			});
 		});
-	});	
+	});
 });

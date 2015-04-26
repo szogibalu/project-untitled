@@ -4,34 +4,34 @@ var should = require('should');
 var assert = require('chai').assert;
 
 var mocked_user_1 = {
-	firstName : 'Tyrion',
-	lastName : 'Lannister'
+	firstName: 'Tyrion',
+	lastName: 'Lannister'
 
 };
 var mocked_user_2 = {
-	firstName : 'Jamie',
-	lastName : 'Lannister'
+	firstName: 'Jamie',
+	lastName: 'Lannister'
 
 };
 var error = undefined;
 
 var service = require('../../services/user-service')({
-	"create" : function(request, callback) {
+	"create": function(request, callback) {
 		callback.call(this, error, mocked_user_1);
 	},
-	"findById" : function(request, callback) {
+	"findById": function(request, callback) {
 		callback.call(this, error, mocked_user_1);
 	},
-	"find" : function(callback) {
-		var resultList = [ mocked_user_1, mocked_user_2 ];
+	"find": function(callback) {
+		var resultList = [mocked_user_1, mocked_user_2];
 		callback.call(this, error, resultList);
 	},
-	"findByIdAndUpdate" : function(requestId, requestBody, callback) {
+	"findByIdAndUpdate": function(requestId, requestBody, callback) {
 		callback.call(this, error, mocked_user_2);
 	},
-	"findByIdAndRemove" : function(requestId, requestBody, callback) {
+	"findByIdAndRemove": function(requestId, requestBody, callback) {
 		callback.call(this, error, mocked_user_1);
-	}	
+	}
 });
 
 describe('User service', function() {
@@ -39,14 +39,14 @@ describe('User service', function() {
 		it('Should create a User', function(done) {
 
 			var request = {
-				body : {
-					firstName : 'Tyrion',
-					lastName : 'Lannister'
+				body: {
+					firstName: 'Tyrion',
+					lastName: 'Lannister'
 				}
 			};
 
 			var response = {
-				json : function(user) {
+				json: function(user) {
 					user.firstName.should.equal('Tyrion');
 					user.lastName.should.equal('Lannister');
 				}
@@ -65,13 +65,13 @@ describe('User service', function() {
 		it('Should give back a User', function(done) {
 
 			var request = {
-				params : {
-					id : '12345'
+				params: {
+					id: '12345'
 				}
 			};
 
 			var response = {
-				json : function(user) {
+				json: function(user) {
 					user.firstName.should.equal('Tyrion');
 					user.lastName.should.equal('Lannister');
 				}
@@ -92,7 +92,7 @@ describe('User service', function() {
 			var request = {};
 
 			var response = {
-				json : function(users) {
+				json: function(users) {
 					assert.lengthOf(users, 2);
 				}
 			};
@@ -110,17 +110,17 @@ describe('User service', function() {
 		it('Should update a User', function(done) {
 
 			var request = {
-				params : {
-					id : '12345'
+				params: {
+					id: '12345'
 				},
-				body : {
-					firstName : 'Tyrion',
-					lastName : 'Lannister'
+				body: {
+					firstName: 'Tyrion',
+					lastName: 'Lannister'
 				}
 			};
 
 			var response = {
-				json : function(user) {
+				json: function(user) {
 					user.firstName.should.equal('Jamie');
 					user.lastName.should.equal('Lannister');
 				}
@@ -139,17 +139,17 @@ describe('User service', function() {
 		it('Should remove a User', function(done) {
 
 			var request = {
-				params : {
-					id : '12345'
+				params: {
+					id: '12345'
 				},
-				body : {
-					firstName : 'Tyrion',
-					lastName : 'Lannister'
+				body: {
+					firstName: 'Tyrion',
+					lastName: 'Lannister'
 				}
 			};
 
 			var response = {
-				json : function(user) {
+				json: function(user) {
 					user.firstName.should.equal('Tyrion');
 					user.lastName.should.equal('Lannister');
 				}

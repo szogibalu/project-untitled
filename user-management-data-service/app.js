@@ -31,7 +31,9 @@ app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -72,9 +74,10 @@ app.use(function(err, req, res, next) {
 // connect to MongoDB
 var dbUrl = configuration.db['url'];
 mongoose.connect(dbUrl, function(err) {
-    if(err) {
+    if (err) {
         console.log('Connection error to ' + dbUrl, err);
-    } else {
+    }
+    else {
         console.log('Connection successful to ' + dbUrl);
     }
 });

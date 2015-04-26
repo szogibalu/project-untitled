@@ -14,17 +14,17 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 @EnableZuulProxy
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private static CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName("X-XSRF-TOKEN");
+        return repository;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll().anyRequest().authenticated()
                 .and().logout()
                 .and().csrf().csrfTokenRepository(csrfTokenRepository());
-    }
-
-    private static CsrfTokenRepository csrfTokenRepository() {
-        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-        repository.setHeaderName("X-XSRF-TOKEN");
-        return repository;
     }
 }

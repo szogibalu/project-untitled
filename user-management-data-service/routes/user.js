@@ -1,9 +1,9 @@
 var express = require('express');
 
 module.exports = function(service) {
-	
+
 	var router = express.Router();
-	
+
 	// GET all users
 	router.get('/', service.getUsers);
 
@@ -19,6 +19,6 @@ module.exports = function(service) {
 
 	// DELETE an existing user
 	router.delete('/:id', service.deleteUser);
-	
-	return router;	
+
+	return router;
 };

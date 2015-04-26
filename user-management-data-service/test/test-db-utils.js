@@ -6,28 +6,28 @@ var config = require('../config/config');
 var mongoose = require('mongoose');
 
 before(function(done) {
-	
+
 	mongoose.connect(config.db.url, function(err) {
 		if (err) {
 			throw err;
-		} else {
+		}
+		else {
 			console.log("Test DB connection opened...");
-		}		
+		}
 		return done();
 	});
 
 });
 
 beforeEach(function(done) {
-	
-	if (mongoose.connection.readyState === 0){
+
+	if (mongoose.connection.readyState === 0) {
 		throw new Error("No database is open...");
 	}
 
 	function clearDB() {
-		for ( var i in mongoose.connection.collections) {
-			mongoose.connection.collections[i].remove(function() {
-			});
+		for (var i in mongoose.connection.collections) {
+			mongoose.connection.collections[i].remove(function() {});
 		}
 		return done();
 	}
@@ -38,5 +38,5 @@ beforeEach(function(done) {
 
 after(function() {
 	console.log("Test DB connection closed...");
-	mongoose.disconnect();	
+	mongoose.disconnect();
 });
