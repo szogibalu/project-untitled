@@ -1,7 +1,0 @@
-# TODO move somewhere else
-security:
-    user:
-        password: as2015
-server:
-    port: 9999
-    contextPath: /uaa
