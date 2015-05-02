@@ -1,4 +1,4 @@
-package demo;
+package com.szogibalu.untitled.gateway;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -40,7 +40,7 @@ import org.springframework.web.util.WebUtils;
 @Controller
 @EnableRedisHttpSession
 @EnableZuulProxy
-public class GatewayApplication {
+public class Gateway {
 
 	@RequestMapping("/user")
 	@ResponseBody
@@ -54,7 +54,7 @@ public class GatewayApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(GatewayApplication.class, args);
+		SpringApplication.run(Gateway.class, args);
 	}
 
 	@Configuration

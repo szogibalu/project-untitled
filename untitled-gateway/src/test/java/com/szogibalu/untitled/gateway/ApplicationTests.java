@@ -1,4 +1,4 @@
-package demo;
+package com.szogibalu.untitled.gateway;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = GatewayApplication.class)
+@SpringApplicationConfiguration(classes = Gateway.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
 public class ApplicationTests {
