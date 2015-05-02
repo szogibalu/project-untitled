@@ -1,9 +1,8 @@
-# TODO move somewhere else
-security:
-  user:
-    password: umc2015
-zuul:
-  routes:
-    resource:
-      path: /resource/**
-      url: http://localhost:9000
+server:
+  port: 8081
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+
+
